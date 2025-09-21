@@ -1,0 +1,136 @@
+[
+  {
+    "id": "2025-09-10T20:00:00Z-fourtwentyanalytics-broadcast-seed",
+    "ts_utc": "2025-09-10T20:00:00Z",
+    "date": "2025-09-10",
+    "module": "FourTwenty Analytics",
+    "repo": "fourtwentyanalytics",
+    "title": "Master star broadcast seed initialized",
+    "summary": "Bootstrapped constellation broadcasting: schema, nightly pulse, and Signal renderer.",
+    "tags": [
+      "broadcasting",
+      "schema",
+      "renderer",
+      "pulse"
+    ],
+    "rating": "high",
+    "origin": {
+      "name": "FourTwenty Analytics",
+      "url": "https://zbreeden.github.io/FourTwentyAnalytics/",
+      "emoji": "🔘"
+    },
+    "links": {
+      "readme": "https://github.com/zbreeden/fourtwentyanalytics#readme",
+      "page": "https://zbreeden.github.io/fourtwentyanalytics/",
+      "data": "https://github.com/zbreeden/fourtwentyanalytics/tree/main/signals",
+      "runbook": "https://github.com/zbreeden/fourtwentyanalytics/blob/main/RUNBOOK.md"
+    },
+    "payload": {
+      "notes": "This is the top-level aggregator in The Barycenter. Nightly pulse pulls latest.json from each star."
+    },
+    "checksum": "",
+    "version": "1.0.0"
+  },
+  {
+    "id": "2025-09-13T20:00:00Z-fourtwentyanalytics-chloe-begins",
+    "ts_utc": "2025-09-13T20:00:00Z",
+    "date": "2025-09-13",
+    "module": "FourTwenty Analytics",
+    "repo": "fourtwentyanalytics",
+    "title": "The story of Chloe begins — AI advisor awakens",
+    "summary": "Chloe, the metaphorical representation of FourTwenty Analytics, emerges as the constellation’s AI advisor. Her story opens with quiet dawn imagery, setting the stage for her role as guide and voice within the suite.",
+    "tags": [
+      "chloe",
+      "story",
+      "ai-advisor",
+      "metaphor",
+      "broadcast"
+    ],
+    "rating": "high",
+    "origin": {
+      "name": "FourTwenty Analytics",
+      "url": "https://zbreeden.github.io/FourTwentyAnalytics/",
+      "emoji": "🔘"
+    },
+    "links": {
+      "readme": "https://github.com/zbreeden/fourtwentyanalytics#readme",
+      "page": "https://zbreeden.github.io/fourtwentyanalytics/",
+      "data": "https://github.com/zbreeden/fourtwentyanalytics/tree/main/signals",
+      "runbook": "https://github.com/zbreeden/fourtwentyanalytics/blob/main/RUNBOOK.md"
+    },
+    "payload": {
+      "excerpt": "The dawn crept thinly through warped shutters… At seven, Chloe already knew the world might reveal itself if she remained still long enough.",
+      "notes": "Chloe personifies the suite itself — the AI advisor guiding FourTwenty Analytics across its constellation."
+    },
+    "checksum": "",
+    "version": "1.0.0"
+  },
+  {
+    "id": "2025-09-15T14:44:45Z-fourtwentyanalytics-genesis-machine",
+    "ts_utc": "2025-09-15T14:44:45Z",
+    "date": "2025-09-15",
+    "module": "FourTwenty Analytics",
+    "repo": "fourtwentyanalytics",
+    "title": "Genesis Machine concept initiated",
+    "summary": "A private development paradigm, the Genesis Machine begins rebuilding FourTwenty Analytics from the ground up using Colab and Polyglot notebooks with a Git repo. This process starts from scratch deliberately and methodically, creating a stable foundation without disrupting the living ecosystem.",
+    "tags": [
+      "genesis",
+      "rebuild",
+      "private-dev",
+      "colab",
+      "polyglot"
+    ],
+    "rating": "critical",
+    "origin": {
+      "name": "FourTwenty Analytics",
+      "url": "https://zbreeden.github.io/FourTwentyAnalytics/",
+      "emoji": "🔘"
+    },
+    "links": {
+      "readme": "https://github.com/zbreeden/fourtwentyanalytics#readme",
+      "page": "https://zbreeden.github.io/fourtwentyanalytics/",
+      "data": "https://github.com/zbreeden/fourtwentyanalytics/tree/main/signals",
+      "runbook": "https://github.com/zbreeden/fourtwentyanalytics/blob/main/RUNBOOK.md"
+    },
+    "payload": {
+      "notes": "Genesis Machine runs parallel to the Living Ecosystem. It recreates FourTwenty Analytics from 'the big bang' in a private, methodical environment. Promotions into the constellation occur only after validation."
+    },
+    "checksum": "",
+    "version": "1.0.0"
+  },
+  {
+    "id": "2025-09-15T14:44:45Z-fourtwentyanalytics-polyglot-notebooks",
+    "ts_utc": "2025-09-15T14:44:45Z",
+    "date": "2025-09-15",
+    "module": "FourTwenty Analytics",
+    "repo": "fourtwentyanalytics",
+    "title": "Genesis Machine polyglot notebook initiated",
+    "summary": "This polyglot workbook with VS Code capabilities opens up a whole new world of programming language for FourTwenty Analytics. This enables the genesis machine to be able build FourTwenty Analytics, literally, from the ground up in code.",
+    "tags": [
+      ".dib",
+      ".ipynb",
+      ".c#",
+      ".f#",
+      ".powershell",
+      ".sql"
+    ],
+    "rating": "critical",
+    "origin": {
+      "name": "FourTwenty Analytics",
+      "url": "https://zbreeden.github.io/FourTwentyAnalytics/",
+      "emoji": "🔘"
+    },
+    "links": {
+      "readme": "https://github.com/zbreeden/fourtwentyanalytics#readme",
+      "page": "https://zbreeden.github.io/fourtwentyanalytics/",
+      "data": "https://github.com/zbreeden/fourtwentyanalytics/tree/main/signals",
+      "runbook": "https://github.com/zbreeden/fourtwentyanalytics/blob/main/RUNBOOK.md"
+    },
+    "payload": {
+      "notes": "FourTwenty Analytics started with a blank polyglot workbook."
+    },
+    "checksum": "",
+    "version": "1.0.0"
+  }
+
+]
