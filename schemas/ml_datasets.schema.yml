@@ -1,0 +1,211 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "ml_datasets.schema.yml"
+title: "ML Datasets Schema"
+description: "Schema for machine learning dataset definitions in the FourTwentyGenesis constellation"
+type: "object"
+properties:
+  datasets:
+    type: "object"
+    patternProperties:
+      "^[a-z0-9_]+$":
+        type: "object"
+        properties:
+          id:
+            type: "string"
+            pattern: "^[a-z0-9_]+$"
+            description: "Unique identifier for the dataset"
+          name:
+            type: "string"
+            description: "Human-readable dataset name"
+          description:
+            type: "string"
+            description: "Dataset purpose and content description"
+          version:
+            type: "string"
+            pattern: "^\\d+\\.\\d+\\.\\d+$"
+            description: "Dataset version following semantic versioning"
+          source:
+            type: "object"
+            properties:
+              type:
+                type: "string"
+                enum: ["file", "database", "api", "synthetic", "stream"]
+              location:
+                type: "string"
+                description: "Path, URL, or connection string to data source"
+              format:
+                type: "string"
+                enum: ["csv", "json", "parquet", "hdf5", "sql", "mongodb", "kafka", "custom"]
+              credentials_required:
+                type: "boolean"
+                description: "Whether authentication is needed to access source"
+            required: ["type", "location", "format"]
+          schema_definition:
+            type: "object"
+            properties:
+              features:
+                type: "object"
+                patternProperties:
+                  "^[a-z0-9_]+$":
+                    type: "object"
+                    properties:
+                      data_type:
+                        type: "string"
+                        enum: ["int", "float", "string", "boolean", "datetime", "categorical", "text", "image", "audio"]
+                      nullable:
+                        type: "boolean"
+                      description:
+                        type: "string"
+                      constraints:
+                        type: "object"
+                        properties:
+                          min_value:
+                            type: "number"
+                          max_value:
+                            type: "number"
+                          min_length:
+                            type: "integer"
+                            minimum: 0
+                          max_length:
+                            type: "integer"
+                            minimum: 1
+                          pattern:
+                            type: "string"
+                          enum_values:
+                            type: "array"
+                            items:
+                              oneOf:
+                                - type: "string"
+                                - type: "number"
+                                - type: "integer"
+                    required: ["data_type", "nullable"]
+                    additionalProperties: false
+              target:
+                type: "object"
+                properties:
+                  column:
+                    type: "string"
+                    pattern: "^[a-z0-9_]+$"
+                  data_type:
+                    type: "string"
+                    enum: ["int", "float", "string", "boolean", "categorical"]
+                  task_type:
+                    type: "string"
+                    enum: ["binary_classification", "multi_classification", "regression", "ranking"]
+                description: "Target variable for supervised learning"
+            required: ["features"]
+          quality_metrics:
+            type: "object"
+            properties:
+              completeness:
+                type: "number"
+                minimum: 0
+                maximum: 1
+                description: "Percentage of non-null values"
+              consistency:
+                type: "number"
+                minimum: 0
+                maximum: 1
+                description: "Data consistency score"
+              accuracy:
+                type: "number"
+                minimum: 0
+                maximum: 1
+                description: "Data accuracy assessment"
+              timeliness:
+                type: "string"
+                enum: ["real_time", "daily", "weekly", "monthly", "historical"]
+                description: "Data freshness category"
+              duplicate_rate:
+                type: "number"
+                minimum: 0
+                maximum: 1
+                description: "Percentage of duplicate records"
+          statistics:
+            type: "object"
+            properties:
+              row_count:
+                type: "integer"
+                minimum: 0
+              column_count:
+                type: "integer"
+                minimum: 1
+              file_size_mb:
+                type: "number"
+                minimum: 0
+              last_updated:
+                type: "string"
+                format: "date-time"
+          preprocessing:
+            type: "object"
+            properties:
+              required:
+                type: "array"
+                items:
+                  type: "string"
+                  enum: ["clean_nulls", "normalize", "encode_categorical", "feature_engineering", "outlier_removal"]
+                description: "Required preprocessing steps"
+              optional:
+                type: "array"
+                items:
+                  type: "string"
+                  enum: ["augmentation", "sampling", "feature_selection", "dimensionality_reduction"]
+                description: "Optional preprocessing steps"
+          privacy:
+            type: "object"
+            properties:
+              contains_pii:
+                type: "boolean"
+                description: "Whether dataset contains personally identifiable information"
+              anonymization_required:
+                type: "boolean"
+                description: "Whether data anonymization is required"
+              retention_policy:
+                type: "string"
+                description: "Data retention requirements"
+              compliance:
+                type: "array"
+                items:
+                  type: "string"
+                  enum: ["gdpr", "ccpa", "hipaa", "ferpa", "sox"]
+                description: "Regulatory compliance requirements"
+          chamber_usage:
+            type: "array"
+            items:
+              type: "string"
+              enum: ["archive", "launch", "protector", "signal"]
+            description: "Which constellation chambers use this dataset"
+          created_at:
+            type: "string"
+            format: "date-time"
+            description: "Dataset creation timestamp"
+          updated_at:
+            type: "string"
+            format: "date-time"
+            description: "Last dataset update timestamp"
+        required: ["id", "name", "description", "version", "source", "schema_definition", "statistics", "chamber_usage", "created_at"]
+        additionalProperties: false
+    additionalProperties: false
+  metadata:
+    type: "object"
+    properties:
+      schema_version:
+        type: "string"
+        const: "1.0.0"
+      data_governance:
+        type: "object"
+        properties:
+          data_owner:
+            type: "string"
+          data_steward:
+            type: "string"
+          classification:
+            type: "string"
+            enum: ["public", "internal", "confidential", "restricted"]
+        required: ["data_owner", "classification"]
+      constellation_integration:
+        type: "boolean"
+        description: "Whether datasets are managed within constellation architecture"
+    required: ["schema_version", "data_governance"]
+required: ["datasets", "metadata"]
+additionalProperties: false

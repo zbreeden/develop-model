@@ -1,0 +1,29 @@
+# latest.schema.yml (top-level)
+type: array
+items:
+  type: object
+  required: [id, ts_utc, date, module, repo, title, summary, rating, origin, links, payload]
+  properties:
+    id: { type: string }
+    ts_utc: { type: string, format: date-time }
+    date: { type: string }
+    module: { type: string }
+    repo: { type: string }
+    title: { type: string }
+    summary: { type: string }
+    rating: { type: string, enum: [low, medium, high, critical] }
+    origin:
+      type: object
+      properties:
+        name:  { type: string }
+        url:   { type: string, format: uri }
+        emoji: { type: string }
+      required: [name, url, emoji]
+    links:
+      type: object
+      properties:
+        readme:  { type: string }
+        page:    { type: string }
+    payload: { type: object }
+    checksum: { type: string }
+    version:  { type: string }

@@ -1,0 +1,167 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "ml_experiments.schema.yml"
+title: "ML Experiments Schema"
+description: "Schema for machine learning experiment tracking in the FourTwentyGenesis constellation"
+type: "object"
+properties:
+  experiments:
+    type: "object"
+    patternProperties:
+      "^[a-z0-9_]+$":
+        type: "object"
+        properties:
+          id:
+            type: "string"
+            pattern: "^[a-z0-9_]+$"
+            description: "Unique identifier for the experiment"
+          name:
+            type: "string"
+            description: "Human-readable experiment name"
+          description:
+            type: "string"
+            description: "Experiment purpose and hypothesis"
+          model_id:
+            type: "string"
+            pattern: "^[a-z0-9_]+$"
+            description: "Reference to the model being experimented with"
+          status:
+            type: "string"
+            enum: ["planned", "running", "completed", "failed", "cancelled"]
+            description: "Current experiment status"
+          hyperparameters:
+            type: "object"
+            patternProperties:
+              "^[a-z0-9_]+$":
+                oneOf:
+                  - type: "string"
+                  - type: "number"
+                  - type: "integer"
+                  - type: "boolean"
+                  - type: "array"
+            description: "Hyperparameters for this experiment"
+          dataset:
+            type: "object"
+            properties:
+              name:
+                type: "string"
+                description: "Dataset identifier"
+              version:
+                type: "string"
+                pattern: "^\\d+\\.\\d+\\.\\d+$"
+              split:
+                type: "object"
+                properties:
+                  train:
+                    type: "number"
+                    minimum: 0.1
+                    maximum: 0.9
+                  validation:
+                    type: "number"
+                    minimum: 0.05
+                    maximum: 0.4
+                  test:
+                    type: "number"
+                    minimum: 0.05
+                    maximum: 0.4
+                required: ["train", "validation", "test"]
+              preprocessing:
+                type: "array"
+                items:
+                  type: "string"
+                  enum: ["normalize", "standardize", "scale", "encode_categorical", "feature_selection", "pca", "impute_missing"]
+            required: ["name", "version", "split"]
+          results:
+            type: "object"
+            properties:
+              metrics:
+                type: "object"
+                patternProperties:
+                  "^[a-z0-9_]+$":
+                    type: "number"
+                description: "Performance metrics achieved"
+              best_epoch:
+                type: "integer"
+                minimum: 1
+              training_time:
+                type: "number"
+                minimum: 0
+                description: "Training time in seconds"
+              model_size:
+                type: "number"
+                minimum: 0
+                description: "Model size in MB"
+              convergence:
+                type: "boolean"
+                description: "Whether the model converged during training"
+          artifacts:
+            type: "object"
+            properties:
+              model_path:
+                type: "string"
+                description: "Path to saved model file"
+              logs_path:
+                type: "string"
+                description: "Path to training logs"
+              plots_path:
+                type: "string"
+                description: "Path to training plots and visualizations"
+              checkpoints:
+                type: "array"
+                items:
+                  type: "string"
+                description: "Paths to model checkpoints"
+          environment:
+            type: "object"
+            properties:
+              python_version:
+                type: "string"
+                pattern: "^\\d+\\.\\d+\\.\\d+$"
+              framework_version:
+                type: "string"
+              gpu_used:
+                type: "boolean"
+              compute_resources:
+                type: "object"
+                properties:
+                  cpu_cores:
+                    type: "integer"
+                    minimum: 1
+                  memory_gb:
+                    type: "number"
+                    minimum: 0.1
+                  gpu_memory_gb:
+                    type: "number"
+                    minimum: 0
+          started_at:
+            type: "string"
+            format: "date-time"
+            description: "Experiment start timestamp"
+          completed_at:
+            type: "string"
+            format: "date-time"
+            description: "Experiment completion timestamp"
+          chamber_signals:
+            type: "array"
+            items:
+              type: "string"
+              format: "uri"
+            description: "References to signals generated during experiment"
+        required: ["id", "name", "description", "model_id", "status", "hyperparameters", "dataset", "started_at"]
+        additionalProperties: false
+    additionalProperties: false
+  metadata:
+    type: "object"
+    properties:
+      schema_version:
+        type: "string"
+        const: "1.0.0"
+      experiment_framework:
+        type: "string"
+        enum: ["mlflow", "wandb", "tensorboard", "manual"]
+        description: "Experiment tracking framework used"
+      constellation_integration:
+        type: "boolean"
+        description: "Whether experiments are integrated with constellation signals"
+    required: ["schema_version"]
+required: ["experiments", "metadata"]
+additionalProperties: false

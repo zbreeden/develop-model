@@ -1,0 +1,137 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "ml_models.schema.yml"
+title: "ML Models Schema"
+description: "Schema for machine learning model definitions in the FourTwentyGenesis constellation"
+type: "object"
+properties:
+  models:
+    type: "object"
+    patternProperties:
+      "^[a-z0-9_]+$":
+        type: "object"
+        properties:
+          id:
+            type: "string"
+            pattern: "^[a-z0-9_]+$"
+            description: "Unique identifier for the ML model"
+          name:
+            type: "string"
+            description: "Human-readable name for the model"
+          description:
+            type: "string"
+            description: "Purpose and capabilities of the model"
+          framework:
+            type: "string"
+            enum: ["tensorflow", "pytorch", "scikit-learn", "ml-net", "huggingface", "xgboost", "lightgbm"]
+            description: "ML framework used for model implementation"
+          architecture:
+            type: "string"
+            enum: ["transformer", "cnn", "rnn", "lstm", "gru", "linear", "tree-based", "ensemble", "custom"]
+            description: "Model architecture type"
+          task_type:
+            type: "string"
+            enum: ["classification", "regression", "clustering", "nlp", "computer-vision", "time-series", "recommendation"]
+            description: "Type of ML task the model performs"
+          version:
+            type: "string"
+            pattern: "^\\d+\\.\\d+\\.\\d+$"
+            description: "Model version following semantic versioning"
+          chamber:
+            type: "string"
+            enum: ["archive", "launch", "protector", "signal"]
+            description: "Primary constellation chamber for this model"
+          training_config:
+            type: "object"
+            properties:
+              epochs:
+                type: "integer"
+                minimum: 1
+                maximum: 10000
+              batch_size:
+                type: "integer"
+                minimum: 1
+                maximum: 10000
+              learning_rate:
+                type: "number"
+                minimum: 0.000001
+                maximum: 1.0
+              optimizer:
+                type: "string"
+                enum: ["adam", "sgd", "rmsprop", "adagrad", "adadelta"]
+              loss_function:
+                type: "string"
+                enum: ["mse", "mae", "cross_entropy", "binary_cross_entropy", "hinge", "huber"]
+            required: ["epochs", "batch_size", "learning_rate", "optimizer"]
+          data_requirements:
+            type: "object"
+            properties:
+              input_schema:
+                type: "string"
+                description: "Reference to input data schema"
+              output_schema:
+                type: "string"
+                description: "Reference to output/prediction schema"
+              min_samples:
+                type: "integer"
+                minimum: 1
+                description: "Minimum required training samples"
+              features:
+                type: "array"
+                items:
+                  type: "string"
+                  pattern: "^[a-z0-9_]+$"
+                description: "Required feature columns"
+            required: ["input_schema", "output_schema", "min_samples"]
+          performance_metrics:
+            type: "array"
+            items:
+              type: "string"
+              enum: ["accuracy", "precision", "recall", "f1", "auc", "mse", "mae", "r2", "rmse"]
+            description: "Metrics to track for model performance"
+          deployment:
+            type: "object"
+            properties:
+              endpoint:
+                type: "string"
+                format: "uri"
+                description: "Model serving endpoint"
+              environment:
+                type: "string"
+                enum: ["development", "staging", "production"]
+              scaling:
+                type: "object"
+                properties:
+                  min_instances:
+                    type: "integer"
+                    minimum: 0
+                  max_instances:
+                    type: "integer"
+                    minimum: 1
+                  auto_scale:
+                    type: "boolean"
+          created_at:
+            type: "string"
+            format: "date-time"
+            description: "Model creation timestamp"
+          updated_at:
+            type: "string"
+            format: "date-time"
+            description: "Last model update timestamp"
+        required: ["id", "name", "description", "framework", "architecture", "task_type", "version", "chamber", "training_config", "data_requirements", "performance_metrics"]
+        additionalProperties: false
+    additionalProperties: false
+  metadata:
+    type: "object"
+    properties:
+      schema_version:
+        type: "string"
+        const: "1.0.0"
+      created_by:
+        type: "string"
+        description: "Creator of the ML models configuration"
+      constellation_role:
+        type: "string"
+        description: "Role of ML models in the constellation"
+    required: ["schema_version"]
+required: ["models", "metadata"]
+additionalProperties: false
