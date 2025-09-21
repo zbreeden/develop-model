@@ -1,0 +1,17 @@
+{
+  "output": "fin_customers.csv",
+  "rows": 4500,
+  "seed": 421,
+  "columns": {
+    "customer_id": { "type": "uuid" },
+    "first_name":  { "type": "first_name" },
+    "last_name":   { "type": "last_name" },
+    "email":       { "type": "email" },
+    "city":        { "type": "city" },
+    "state":       { "type": "state" },
+    "zip":         { "type": "zip" },
+    "joined_at":   { "type": "date", "start": "2019-01-01", "end": "2025-08-31" },
+    "channel":     { "type": "choice", "values": ["Agent", "Online", "Phone", "Branch"], "weights": [0.55, 0.25, 0.10, 0.10] }
+  }
+}
+

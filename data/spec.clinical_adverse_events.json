@@ -1,0 +1,14 @@
+{
+  "output": "clinical_adverse_events.csv",
+  "rows": 600,
+  "seed": 420,
+  "columns": {
+    "ae_id":               { "type": "uuid" },
+    "participant_id":      { "type": "fk", "source": "clinical_participants.csv", "column": "participant_id" },
+    "reported_at":         { "type": "date", "start": "2023-02-01", "end": "2025-09-01" },
+    "severity":            { "type": "choice", "values": ["Mild","Moderate","Severe"], "weights": [0.55,0.35,0.10] },
+    "related_to_treatment":{ "type": "bool", "p": 0.4 },
+    "description":         { "type": "lorem", "words": 16 }
+  }
+}
+

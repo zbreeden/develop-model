@@ -1,0 +1,14 @@
+{
+  "output": "fin_payments.csv",
+  "rows": 24000,
+  "seed": 421,
+  "columns": {
+    "payment_id":   { "type": "uuid" },
+    "policy_id":    { "type": "fk", "source": "fin_policies.csv", "column": "policy_id" },
+    "payment_date": { "type": "date", "start": "2020-01-01", "end": "2025-09-01" },
+    "amount_usd":   { "type": "float", "min": 20.0, "max": 1000.0, "round": 2 },
+    "method":       { "type": "choice", "values": ["ACH", "Card", "Check"], "weights": [0.60, 0.35, 0.05] },
+    "is_late":      { "type": "bool", "p": 0.08 }
+  }
+}
+

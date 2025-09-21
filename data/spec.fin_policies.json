@@ -1,0 +1,15 @@
+{
+  "output": "fin_policies.csv",
+  "rows": 6500,
+  "seed": 421,
+  "columns": {
+    "policy_id":    { "type": "uuid" },
+    "customer_id":  { "type": "fk", "source": "fin_customers.csv", "column": "customer_id" },
+    "policy_type":  { "type": "choice", "values": ["Life", "Auto", "Home", "Annuity"], "weights": [0.45, 0.25, 0.20, 0.10] },
+    "premium_usd":  { "type": "float", "min": 200.0, "max": 6000.0, "round": 2 },
+    "effective_date": { "type": "date", "start": "2020-01-01", "end": "2025-09-01" },
+    "renewal_date":   { "type": "date", "start": "2021-01-01", "end": "2026-09-01" },
+    "renewed":      { "type": "bool", "p": 0.78 }
+  }
+}
+

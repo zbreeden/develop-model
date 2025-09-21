@@ -1,0 +1,15 @@
+{
+  "output": "fin_claims.csv",
+  "rows": 2200,
+  "seed": 421,
+  "columns": {
+    "claim_id":        { "type": "uuid" },
+    "policy_id":       { "type": "fk", "source": "fin_policies.csv", "column": "policy_id" },
+    "incident_date":   { "type": "date", "start": "2020-01-01", "end": "2025-09-01" },
+    "incident_type":   { "type": "choice", "values": ["Accident", "Weather", "Theft", "Medical", "Other"], "weights": [0.35, 0.25, 0.10, 0.20, 0.10] },
+    "claim_amount_usd":{ "type": "float", "min": 100.0, "max": 50000.0, "round": 2 },
+    "status":          { "type": "choice", "values": ["Open", "Under Review", "Approved", "Denied"], "weights": [0.15, 0.25, 0.50, 0.10] },
+    "cycle_time_days": { "type": "poisson", "lam": 18 }
+  }
+}
+

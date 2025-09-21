@@ -1,0 +1,17 @@
+{
+  "output": "clinical_surveys.csv",
+  "rows": 3200,
+  "seed": 420,
+  "columns": {
+    "survey_id":        { "type": "uuid" },
+    "participant_id":   { "type": "fk", "source": "clinical_participants.csv", "column": "participant_id" },
+    "administered_at":  { "type": "datetime", "start": "2023-02-01", "end": "2025-09-01", "fmt": "%Y-%m-%d %H:%M:%S" },
+    "instrument":       { "type": "choice", "values": ["QoL-9","Pain-Index","Fatigue-Scale","Adherence-Check"] },
+    "qol_score":        { "type": "likert5" },
+    "adherence_score":  { "type": "likert5" },
+    "fatigue_score":    { "type": "likert5" },
+    "terminated_early": { "type": "bool", "p": 0.08 },
+    "loi_minutes":      { "type": "poisson", "lam": 12 }
+  }
+}
+
